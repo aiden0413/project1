@@ -4,11 +4,11 @@ module.exports = {
   theme: {
     extend: {},
     height: {
-      '600px': '600px',
+      'screen': '100vh',
     },
     width: {
       '200px': '200px',
-    }
+    },
   },
   variants: {
     extend: {},

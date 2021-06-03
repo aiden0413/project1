@@ -6,7 +6,7 @@ import Memos from "./Memos";
 
 function Content() {
     return (
-        <div className="flex flex-row flex-grow">
+        <div className="flex flex-row flex-grow overfolw-auto">
             <Side />
             <div className="flex flex-col flex-grow">
                 <Toolbar />
