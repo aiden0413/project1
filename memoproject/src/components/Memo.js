@@ -5,7 +5,7 @@ function Memo() {
         <div className="">
             <div className="flex flex-col gap-3 bg-green-400">
                 <div className="bg-green-200">제목</div>
-                <div className="flex-grow bg-green-200">
+                <div className="flex-grow bg-green-200 h-300px">
                     내용asdfasdfasdfasdfsdf
                     asdfasdfasdfasdfs
                    
