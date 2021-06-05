@@ -2,12 +2,18 @@ import React from "react";
 
 import Memo from './Memo';
 
-function Memos() {
+function Memos({ data }) {
+    const memolist = data.memolist.map(
+        memo => (<Memo
+        title={memo.title}
+        content={memo.content}
+        date={memo.date}
+        />)
+    );
+
     return (
         <div className="overflow-y-auto auto-rows-min grid grid-cols-4 gap-6 flex-grow justify-start py-6 px-6 border border-gray-300 relative">
-            <Memo title="제목" content="내용" date="2021.06.05"/>
-            <Memo title="제목" content="내용" date="2021.06.05"/>
-            <Memo title="제목" content="내용" date="2021.06.05"/>
+            {memolist}
         </div>
     )
 }
