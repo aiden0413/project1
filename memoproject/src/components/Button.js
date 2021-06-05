@@ -2,7 +2,8 @@ import React from "react";
 
 function Button({
     text = "button",
-    btnFunc
+    btnFunc,
+    id="",
 }) {
     const handleOnClick = () => {
         if(text==="새 메모"){
@@ -16,7 +17,7 @@ function Button({
             
         }
         else if(text==="삭제"){
-            
+            btnFunc(id);
         }
         else if(text==="수정"){
             

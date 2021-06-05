@@ -18,7 +18,7 @@ function MemoProject() {
         setData({memolist: [{id: uuid(), ...memodata}].concat(data.memolist)});
     }
     const handleRemove = (id) => {
-        
+        setData({memolist: data.memolist.filter(memo => memo.id != id)});
     }
     const handleEdit = (id) => {
 

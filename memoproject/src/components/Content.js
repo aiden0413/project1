@@ -19,13 +19,16 @@ function Content({
             />
             <div className="flex flex-col flex-grow">
                 <Toolbar
-                    onRemove={onRemove}
+                    /*onRemove={onRemove}
                     onEdit={onEdit}
                     onCancel={onCancel}
-                    onSave={onSave}
+                    onSave={onSave}*/
                 />
                 <Memos 
                     data={data}
+                    onRemove={onRemove}
+                    onCancel={onCancel}
+                    onSave={onSave}
                 />
             </div>
         </div>

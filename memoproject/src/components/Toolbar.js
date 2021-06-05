@@ -3,10 +3,10 @@ import React from "react";
 import Button from './Button';
 
 function Toolbar({
-    onRemove,
+    /*onRemove,
     onEdit,
     onCancel,
-    onSave,
+    onSave,*/
 }) {
     return (
         <div className="flex flex-row flex-grow-0 gap-6 justify-start py-6 px-6 border border-gray-300 relative">

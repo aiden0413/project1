@@ -3,6 +3,7 @@ import React from "react";
 import Button from './Button';
 
 function Memo({
+    id="",
     title="",
     content="",
     date="",
@@ -28,6 +29,7 @@ function Memo({
                 <Button 
                     text="삭제" 
                     btnFunc={onRemove}
+                    id={id}
                 />
             </div>
         </div>
