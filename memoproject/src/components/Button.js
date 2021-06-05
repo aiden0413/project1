@@ -7,7 +7,8 @@ function Button({
 }) {
     const handleOnClick = () => {
         if(text==="새 메모"){
-            const newmemo = {title: "new제목", content: "new내용", date: "new날짜"};
+            let today = new Date();
+            const newmemo = {title: "new제목", content: "new내용", date: today.toLocaleString()};
             btnFunc(newmemo);
         }
         else if(text==="저장"){
