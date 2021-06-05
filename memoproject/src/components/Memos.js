@@ -5,9 +5,10 @@ import Memo from './Memo';
 function Memos({ data }) {
     const memolist = data.memolist.map(
         memo => (<Memo
-        title={memo.title}
-        content={memo.content}
-        date={memo.date}
+            id={memo.id}
+            title={memo.title}
+            content={memo.content}
+            date={memo.date}
         />)
     );
 

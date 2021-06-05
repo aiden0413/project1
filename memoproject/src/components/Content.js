@@ -4,13 +4,17 @@ import Toolbar from "./Toolbar";
 import Side from "./Side";
 import Memos from "./Memos";
 
-function Content({ data }) {
+function Content({ data, onCreate }) {
     return (
         <div className="flex flex-row flex-grow overflow-auto">
-            <Side />
+            <Side 
+                onCreate={onCreate}
+            />
             <div className="flex flex-col flex-grow">
                 <Toolbar />
-                <Memos data={data} />
+                <Memos 
+                    data={data}
+                />
             </div>
         </div>
     )

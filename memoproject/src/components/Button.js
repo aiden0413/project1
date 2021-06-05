@@ -2,33 +2,33 @@ import React from "react";
 
 function Button({
     text = "button",
-    onclick = ""
+    onCreate
 }) {
-    let handleOnClick;
-    if({text}=="새 메모"){
-        handleOnClick = () =>{
-            
+    const handleOnClick = () => {
+        if(text==="새 메모"){
+            const newmemo = {title: "new제목", content: "new내용", date: "new날짜"};
+            onCreate(newmemo);
+        }
+        else if(text==="저장"){
+    
+        }
+        else if(text==="취소"){
+    
+        }
+        else if(text==="삭제"){
+    
+        }
+        else if(text==="수정"){
+    
         }
     }
-    else if({text}=="저장"){
-
-    }
-    else if({text}=="취소"){
-
-    }
-    else if({text}=="삭제"){
-
-    }
-    else if({text}=="수정"){
-
-    }
+    
     return (
-        <div className="flex-initial py-1 px-3 font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-white bg-blue-400 border-green-400 hover:bg-green-600 hover:border-green-600">
-            <button
-                onClick=""
-            >
-                {text}
-            </button>
+        <div 
+            className="flex-initial w-full py-1 px-3 font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-white bg-blue-400 border-green-400 hover:bg-green-600 hover:border-green-600"
+            onClick={handleOnClick}
+        >
+            {text}
         </div>
     )
 }
