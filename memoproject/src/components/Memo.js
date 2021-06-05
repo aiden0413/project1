@@ -1,17 +1,15 @@
 import React from "react";
 
-function Memo() {
+function Memo({ 
+    title="",
+    content="",
+    date="",
+}) {
     return (
-        <div className="">
-            <div className="flex flex-col gap-3 bg-green-400">
-                <div className="bg-green-200">제목</div>
-                <div className="flex-grow bg-green-200 h-300px">
-                    내용asdfasdfasdfasdfsdf
-                    asdfasdfasdfasdfs
-                   
-                </div>
-                <div className="bg-green-200">작성날짜</div>
-            </div>
+        <div className="flex flex-col gap-3 bg-green-400 flex-grow">
+            <div className="bg-green-200">{title}</div>
+            <div className="bg-green-200 h-300px">{content}</div>
+            <div className="bg-green-200">{date}</div>
         </div>
     )
 }

@@ -6,6 +6,7 @@ module.exports = {
     height: {
       'screen': '100vh',
       '300px': '300px',
+      '500px': '500px',
     },
     width: {
       '200px': '200px',
