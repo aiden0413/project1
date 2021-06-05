@@ -17,16 +17,16 @@ function MemoProject() {
     const handleCreate = (memodata) => {
         setData({memolist: [{id: uuid(), ...memodata}].concat(data.memolist)});
     }
-    const handleRemove = () => {
+    const handleRemove = (id) => {
+        
+    }
+    const handleEdit = (id) => {
 
     }
-    const handleEdit = () => {
+    const handleCancel =(id) => {
 
     }
-    const handleCancel =() => {
-
-    }
-    const handleSave = () => {
+    const handleSave = (id) => {
 
     }
 

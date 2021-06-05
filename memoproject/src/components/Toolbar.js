@@ -10,7 +10,7 @@ function Toolbar({
 }) {
     return (
         <div className="flex flex-row flex-grow-0 gap-6 justify-start py-6 px-6 border border-gray-300 relative">
-            <Button 
+            {/*<Button 
                 text="저장"
                 btnFunc={onSave}
             />
@@ -25,7 +25,7 @@ function Toolbar({
             <Button
                 text="수정" 
                 btnFunc={onEdit}
-            />
+            />*/}
             Toolbar
         </div>
     )
