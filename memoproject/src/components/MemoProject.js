@@ -17,6 +17,18 @@ function MemoProject() {
     const handleCreate = (memodata) => {
         setData({memolist: [{id: uuid(), ...memodata}].concat(data.memolist)});
     }
+    const handleRemove = () => {
+
+    }
+    const handleEdit = () => {
+
+    }
+    const handleCancel =() => {
+
+    }
+    const handleSave = () => {
+
+    }
 
     return (
         <div className="flex flex-col h-screen">
@@ -24,6 +36,10 @@ function MemoProject() {
             <Content 
                 data={data}
                 onCreate={handleCreate}
+                onRemove={handleRemove}
+                onEdit={handleEdit}
+                onCancel={handleCancel}
+                onSave={handleSave}
             />
             <Footer />
         </div>

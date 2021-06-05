@@ -2,24 +2,24 @@ import React from "react";
 
 function Button({
     text = "button",
-    onCreate
+    btnFunc
 }) {
     const handleOnClick = () => {
         if(text==="새 메모"){
             const newmemo = {title: "new제목", content: "new내용", date: "new날짜"};
-            onCreate(newmemo);
+            btnFunc(newmemo);
         }
         else if(text==="저장"){
-    
+            
         }
         else if(text==="취소"){
-    
+            
         }
         else if(text==="삭제"){
-    
+            
         }
         else if(text==="수정"){
-    
+            
         }
     }
     
