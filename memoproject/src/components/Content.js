@@ -13,7 +13,10 @@ function Content({ data, onCreate, sign, onSign }) {
                 onSign={onSign}
             />
             <div className="flex flex-col flex-grow">
-                <Toolbar />
+                <Toolbar 
+                    sign={sign}
+                    onSign={onSign}
+                />
                 <Memos 
                     data={data}
                     sign={sign}

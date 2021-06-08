@@ -3,6 +3,7 @@ import Editor from './Editor';
 import Memo from './Memo';
 
 function Memos({ data, sign, onSign}) {
+
     const memolist = data.memolist.map(
         memo => (<Memo
             id={memo.id}
@@ -11,12 +12,13 @@ function Memos({ data, sign, onSign}) {
             date={memo.date}
         />)
     );
-
+   
     if(sign.makenewEditor === true){
-        onSign(false);
         return (
             <div className="overflow-y-auto auto-rows-min grid grid-cols-4 gap-6 flex-grow justify-start py-6 px-6 border border-gray-300 relative">    
-                {memolist}
+                    <div><input className="memo_title" placeholder="제목"></input>
+                    <input className="memo_content h-300px" placeholder="내용"></input>
+                    <div className="bg-green-200">"2021-06-09-07-34"</div></div>
             </div>
         )    
     }

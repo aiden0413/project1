@@ -7,17 +7,16 @@ function Button({
 }) {
     const handleOnClick = () => {
         if(text==="새 메모"){
-            // Editor => (<Editor />
             let newmemo = {title: "new제목", content: "new내용", date: "new날짜"};
-
             onCreate(newmemo);
             onSign(true);
         }
         else if(text==="저장"){
-    
         }
         else if(text==="취소"){
-    
+            onSign(false);
+            console.log("이전으로 돌아갑니다.")
+            
         }
         else if(text==="삭제"){
     
