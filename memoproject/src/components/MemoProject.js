@@ -18,14 +18,25 @@ function MemoProject() {
         setData({memolist: [{id: uuid(), ...memodata}].concat(data.memolist)});
     }
 
+    const [sign, setSign] = useState({
+        makenewEditor: false,
+    })
+    
+    const handleSign = (boolean) =>{
+        setSign({makenewEditor: boolean});
+    }
+    // console.log(data);
     return (
         <div className="flex flex-col h-screen">
             <Header />
             <Content 
                 data={data}
                 onCreate={handleCreate}
+                sign={sign}
+                onSign={handleSign}
             />
             <Footer />
+            
         </div>
     )
 }

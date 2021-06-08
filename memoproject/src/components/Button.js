@@ -1,13 +1,17 @@
-import React from "react";
+import React, { memo } from "react";
 
 function Button({
     text = "button",
-    onCreate
+    onCreate,
+    onSign
 }) {
     const handleOnClick = () => {
         if(text==="새 메모"){
-            const newmemo = {title: "new제목", content: "new내용", date: "new날짜"};
+            // Editor => (<Editor />
+            let newmemo = {title: "new제목", content: "new내용", date: "new날짜"};
+
             onCreate(newmemo);
+            onSign(true);
         }
         else if(text==="저장"){
     
