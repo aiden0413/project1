@@ -2,27 +2,28 @@ import React, { memo } from "react";
 
 function Button({
     text = "button",
-    onCreate,
-    onSign
+    btnFunc,
+    onSign,
+    id="",
 }) {
     const handleOnClick = () => {
         if(text==="새 메모"){
-            let newmemo = {title: "new제목", content: "new내용", date: "new날짜"};
-            onCreate(newmemo);
+            let today = new Date();
+            const newmemo = {title: "new제목", content: "new내용", date: today.toLocaleString()};
+            btnFunc(newmemo);
             onSign(true);
         }
         else if(text==="저장"){
         }
         else if(text==="취소"){
             onSign(false);
-            console.log("이전으로 돌아갑니다.")
-            
+            console.log("이전으로 돌아갑니다."); 
         }
         else if(text==="삭제"){
-    
+            btnFunc(id);
         }
         else if(text==="수정"){
-    
+            
         }
     }
     

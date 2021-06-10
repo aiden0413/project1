@@ -2,14 +2,23 @@ import React from "react";
 import Editor from './Editor';
 import Memo from './Memo';
 
-function Memos({ data, sign, onSign}) {
-
+function Memos({
+    data,
+    sign,
+    onSign,
+    onRemove,
+    onCancel,
+    onSave,
+}) {
     const memolist = data.memolist.map(
         memo => (<Memo
             id={memo.id}
             title={memo.title}
             content={memo.content}
             date={memo.date}
+            onRemove={onRemove}
+            onCancel={onCancel}
+            onSave={onSave}
         />)
     );
    

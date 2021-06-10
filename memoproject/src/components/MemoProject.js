@@ -17,6 +17,18 @@ function MemoProject() {
     const handleCreate = (memodata) => {
         setData({memolist: [{id: uuid(), ...memodata}].concat(data.memolist)});
     }
+    const handleRemove = (id) => {
+        setData({memolist: data.memolist.filter(memo => memo.id != id)});
+    }
+    const handleEdit = (id) => {
+
+    }
+    const handleCancel =(id) => {
+
+    }
+    const handleSave = (id) => {
+
+    }
 
     const [sign, setSign] = useState({
         makenewEditor: false,
@@ -34,6 +46,10 @@ function MemoProject() {
                 onCreate={handleCreate}
                 sign={sign}
                 onSign={handleSign}
+                onRemove={handleRemove}
+                onEdit={handleEdit}
+                onCancel={handleCancel}
+                onSave={handleSave}
             />
             <Footer />
             

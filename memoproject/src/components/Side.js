@@ -9,6 +9,7 @@ function Side({ onCreate, onSign }) {
                 text="새 메모"
                 onCreate={onCreate}
                 onSign={onSign}
+                btnFunc={onCreate}
             />
             Side
         </div>
