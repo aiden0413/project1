@@ -25,6 +25,7 @@ function EditorForm({
         placeholder="제목"
         onChange={handleChange}
       />
+      <div className="border-b border-gray-300 m-3"/>
       <Editor
         toolbar={{
           list: { inDropdown: true },
@@ -39,7 +40,6 @@ function EditorForm({
         editorState={editorState}
         onEditorStateChange={onEditorStateChange}
       />
-      id는 {match.params.memoid} 입니다.<br/>
     </div>
   );
 };
