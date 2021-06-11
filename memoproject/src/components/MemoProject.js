@@ -1,5 +1,6 @@
 import React, { memo, useState } from "react";
 import { v4 as uuid } from 'uuid';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from "./Header";
 import Content from "./Content";
@@ -30,30 +31,21 @@ function MemoProject() {
         setData({memolist: data.memolist.map(memo => memo.id == id ? {id: memo.id, title: update.title, content: update.content, date: update.date, editing: false} : memo)});
     }
 
-    const [sign, setSign] = useState({
-        makenewEditor: false,
-    })
-    
-    const handleSign = (boolean) =>{
-        setSign({makenewEditor: boolean});
-    }
-    // console.log(data);
     return (
-        <div className="flex flex-col h-screen">
-            <Header />
-            <Content 
-                data={data}
-                onCreate={handleCreate}
-                sign={sign}
-                onSign={handleSign}
-                onRemove={handleRemove}
-                onEdit={handleEdit}
-                onSave={handleSave}
-                onCancel={handleCancel}
-            />
-            <Footer />
-            
-        </div>
+        <Router>
+            <div className="flex flex-col h-screen">
+                <Header />
+                <Content 
+                    data={data}
+                    onCreate={handleCreate}
+                    onRemove={handleRemove}
+                    onEdit={handleEdit}
+                    onSave={handleSave}
+                    onCancel={handleCancel}
+                />
+                <Footer />     
+            </div>
+        </Router>
     )
 }
 

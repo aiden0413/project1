@@ -1,5 +1,4 @@
 import React from "react";
-import Editor from './Editor';
 import Memo from './Memo';
 
 function Memos({
@@ -25,7 +24,7 @@ function Memos({
         />)
     );
    
-    if(sign.makenewEditor === true){
+    if(sign === true){
         return (
             <div className="overflow-y-auto auto-rows-min grid grid-cols-4 gap-6 flex-grow justify-start py-6 px-6 border border-gray-300 relative">    
                     <div><input className="memo_title" placeholder="제목"></input>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Route, Link } from 'react-router-dom';
 
 import Button from './Button';
 
@@ -36,7 +37,7 @@ function Memo({
                         onChange={handleChange}
                 />
                 <div className="bg-green-200">{date}</div>
-                <div className="flex flex-row justify-around">
+                {/*<div className="flex flex-row justify-around">
                     <Button 
                         text="저장"
                         btnFunc={onSave}
@@ -53,34 +54,20 @@ function Memo({
                         btnFunc={onRemove}
                         id={id}
                     />
-                </div>
+                </div>*/}
             </div>
         )
     }
 
     return (
-        <div className="flex flex-col gap-3 bg-green-400 p-3"
-            onClick={() => {onEdit(id)}}
-        >
-            <div className="bg-green-200">{title}</div>
-            <div className="bg-green-200 h-300px">{content}</div>
-            <div className="bg-green-200">{date}</div>
-            {/*<div className="flex flex-row gap-4 justify-center">
-                <Button 
-                    className="f"
-                    text="저장"
-                    btnFunc={onSave}
-                />
-                <Button 
-                    text="취소"
-                    btnFunc={onCancel}
-                />
-                <Button 
-                    text="삭제" 
-                    btnFunc={onRemove}
-                    id={id}
-                />
-            </div>*/}
+        <div>
+            <Link to="/memo/{id}">
+                <div className="flex flex-col gap-3 bg-green-400 p-3">
+                    <div className="bg-green-200">{title}</div>
+                    <div className="bg-green-200 h-300px">{content}</div>
+                    <div className="bg-green-200">{date}</div>
+                </div>
+            </Link>
         </div>
     )
 }
