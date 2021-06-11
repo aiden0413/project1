@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { v4 as uuid } from 'uuid';
 
 import Header from "./Header";
@@ -8,9 +8,9 @@ import Footer from "./Footer";
 function MemoProject() {
     const [data, setData] = useState({
         memolist: [
-            {id: uuid(), title: "제목1", content: "내용1", date: "날짜1"},
-            {id: uuid(), title: "제목2", content: "내용2", date: "날짜2"},
-            {id: uuid(), title: "제목3", content: "내용3", date: "날짜3"}
+            {id: uuid(), title: "제목1", content: "내용1", date: "날짜1", editing: false},
+            {id: uuid(), title: "제목2", content: "내용2", date: "날짜2", editing: false},
+            {id: uuid(), title: "제목3", content: "내용3", date: "날짜3", editing: false}
         ],
     })
 
@@ -21,13 +21,13 @@ function MemoProject() {
         setData({memolist: data.memolist.filter(memo => memo.id != id)});
     }
     const handleEdit = (id) => {
-
+        setData({memolist: data.memolist.map(memo => memo.id == id ? {...memo, editing: true} : {...memo, editing: false})});
     }
-    const handleCancel =(id) => {
-
+    const handleCancel = (id) => {
+        setData({memolist: data.memolist.map(memo => memo.id == id ? {...memo, editing: false} : memo)});
     }
-    const handleSave = (id) => {
-
+    const handleSave = (id, update) => {
+        setData({memolist: data.memolist.map(memo => memo.id == id ? {id: memo.id, title: update.title, content: update.content, date: update.date, editing: false} : memo)});
     }
 
     const [sign, setSign] = useState({
@@ -48,8 +48,8 @@ function MemoProject() {
                 onSign={handleSign}
                 onRemove={handleRemove}
                 onEdit={handleEdit}
-                onCancel={handleCancel}
                 onSave={handleSave}
+                onCancel={handleCancel}
             />
             <Footer />
             

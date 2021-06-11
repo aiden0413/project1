@@ -7,8 +7,9 @@ function Memos({
     sign,
     onSign,
     onRemove,
-    onCancel,
+    onEdit,
     onSave,
+    onCancel,
 }) {
     const memolist = data.memolist.map(
         memo => (<Memo
@@ -16,9 +17,11 @@ function Memos({
             title={memo.title}
             content={memo.content}
             date={memo.date}
+            editing={memo.editing}
+            onEdit={onEdit}
             onRemove={onRemove}
-            onCancel={onCancel}
             onSave={onSave}
+            onCancel={onCancel}
         />)
     );
    

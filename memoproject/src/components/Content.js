@@ -10,9 +10,9 @@ function Content({
     onCreate,
     onRemove,
     onEdit,
-    onCancel,
     onSave,
-    onSign
+    onCancel,
+    onSign,
  }) {
     return (
         <div className="flex flex-row flex-grow overflow-auto">
@@ -28,8 +28,9 @@ function Content({
                 <Memos 
                     data={data}
                     onRemove={onRemove}
-                    onCancel={onCancel}
+                    onEdit={onEdit}
                     onSave={onSave}
+                    onCancel={onCancel}
                     sign={sign}
                     onSign={onSign}
                 />
