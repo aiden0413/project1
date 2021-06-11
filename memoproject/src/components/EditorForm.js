@@ -3,15 +3,17 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState } from 'draft-js';
 
-function EditorForm() {
+function EditorForm({ match }) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState);
   };
 
+  console.log(editorState);
   return (
     <div className="m-3"> 
+      {/*id는 {match.params.memoid} 입니다.*/}
       <Editor
         toolbar={{
           list: { inDropdown: true },

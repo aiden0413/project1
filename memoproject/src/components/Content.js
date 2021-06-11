@@ -4,15 +4,13 @@ import Toolbar from "./Toolbar";
 import Side from "./Side";
 import Memos from "./Memos";
 import EditorForm from "./EditorForm";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 function Content({ 
     data,
     onCreate,
     onRemove,
-    onEdit,
     onSave,
-    onCancel,
  }) {
     const sign = false;
     return (
@@ -21,30 +19,33 @@ function Content({
             <div className="flex flex-col flex-grow">
                 <Switch>
                     <Route exact path="/"
-                        render={() => (
+                        render={(props) => (
                         <div>
                             <Toolbar
                                 sign={false}
                                 onCreate={onCreate}
+                                onRemove={onRemove}
+                                {...props}
                             />
                             <Memos 
                                 data={data}
-                                onRemove={onRemove}
-                                onEdit={onEdit}
-                                onSave={onSave}
-                                onCancel={onCancel}
+                                {...props}
                             />
                         </div>
                         )}
                     />
-                    <Route path="/editor" 
-                        render={() => (
+                    <Route path="/memo/:memoid" 
+                        render={(props) => (
                             <div>
                                 <Toolbar
                                     sign={true}
                                     onCreate={onCreate}
+                                    onRemove={onRemove}
+                                    {...props}
                                 />
-                                <EditorForm/>
+                                <EditorForm
+                                    {...props}
+                                />
                             </div>
                         )}
                     />

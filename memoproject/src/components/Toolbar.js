@@ -16,6 +16,7 @@ function Toolbar({
     onEdit,
     onRemove,
     onCancel,
+    match,
 }) {
     if(sign === true){
         return (
@@ -32,13 +33,13 @@ function Toolbar({
                         onSign={onSign}
                     />
                 </Link>
-                <Button 
-                    text="삭제" 
-
-                />
-                <Button
-                    text="수정" 
-                />
+                <Link to="/">
+                    <Button 
+                        text="삭제" 
+                        btnFunc={onRemove}
+                        id={match.params.memoid}
+                    />
+                </Link>
             </div>
     )}
     else{
@@ -50,12 +51,12 @@ function Toolbar({
                 <Button 
                     text="검색"
                 />
-                <Button 
+                {/*<Button 
                     text="삭제" 
                 />
                 <Button
                     text="수정" 
-                />
+                />*/}
             </div>
         )}
 }

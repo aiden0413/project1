@@ -9,7 +9,7 @@ function Button({
 }) {
     const handleOnClick = () => {
         if(text==="새 메모"){
-
+            
         }
         else if(text==="저장"){
             /*if(sign.makenewEditor===true){
