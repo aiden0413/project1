@@ -8,8 +8,6 @@ function Toolbar({
     title="",
     content="",
     date="",
-    editing="",
-    onCreate,
     sign,
     onSign,
     onSave,
@@ -21,12 +19,13 @@ function Toolbar({
     if(sign === true){
         return (
             <div className="flex flex-row flex-grow-0 gap-6 justify-start py-6 px-6 border border-gray-300 relative">
-                <Button 
-                    text="저장"
-                    btnFunc={onSave}
-                    id={id}
-                    creatememo={onCreate}
-                />
+                <Link to="/">
+                    <Button 
+                        text="저장"
+                        btnFunc={onSave}
+                        id={match.params.memoid}
+                    />
+                </Link>
                 <Link to="/">
                     <Button 
                         text="취소"

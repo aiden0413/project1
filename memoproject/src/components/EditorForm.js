@@ -3,17 +3,28 @@ import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState } from 'draft-js';
 
-function EditorForm({ match }) {
+function EditorForm({ 
+  match,
+  data,
+ }) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [state, setState] = useState(data.memolist.find(memo => memo.id === match.params.memoid));
 
   const onEditorStateChange = (editorState) => {
     setEditorState(editorState);
   };
+  const handleChange = (e) => {
+    setState({...state, [e.target.name]: e.target.value})
+  }
 
-  console.log(editorState);
   return (
     <div className="m-3"> 
-      {/*id는 {match.params.memoid} 입니다.*/}
+      <input
+        className="outline-none"
+        name="title"
+        placeholder="제목"
+        onChange={handleChange}
+      />
       <Editor
         toolbar={{
           list: { inDropdown: true },
@@ -28,6 +39,7 @@ function EditorForm({ match }) {
         editorState={editorState}
         onEditorStateChange={onEditorStateChange}
       />
+      id는 {match.params.memoid} 입니다.<br/>
     </div>
   );
 };

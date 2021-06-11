@@ -8,7 +8,6 @@ import { Route, Switch } from 'react-router-dom';
 
 function Content({ 
     data,
-    onCreate,
     onRemove,
     onSave,
  }) {
@@ -23,8 +22,6 @@ function Content({
                         <div>
                             <Toolbar
                                 sign={false}
-                                onCreate={onCreate}
-                                onRemove={onRemove}
                                 {...props}
                             />
                             <Memos 
@@ -39,11 +36,12 @@ function Content({
                             <div>
                                 <Toolbar
                                     sign={true}
-                                    onCreate={onCreate}
                                     onRemove={onRemove}
+                                    onSave={onSave}
                                     {...props}
                                 />
                                 <EditorForm
+                                    data={data}
                                     {...props}
                                 />
                             </div>

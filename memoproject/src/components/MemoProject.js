@@ -25,7 +25,12 @@ function MemoProject() {
         setData({memolist: data.memolist.map(memo => memo.id == id ? {...memo} : {...memo, editing: false})});
     }
     const handleSave = (id, update) => {
-        setData({memolist: data.memolist.map(memo => memo.id == id ? {id: memo.id, title: update.title, content: update.content, date: update.date, editing: false} : memo)});
+        if(data.memolist.some(memo => memo.id == id)){
+            setData({memolist: data.memolist.map(memo => memo.id == id ? {id: memo.id, title: update.title, content: update.content, date: update.date} : memo)});
+        }
+        else{
+            setData({memolist: [{id: id, title: update.title, content: update.content, date: update.date}].concat(data.memolist)});
+        }
     }
 
     return (

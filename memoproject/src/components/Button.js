@@ -9,17 +9,12 @@ function Button({
 }) {
     const handleOnClick = () => {
         if(text==="새 메모"){
-            
+
         }
         else if(text==="저장"){
-            /*if(sign.makenewEditor===true){
-                let today = new Date();
-                const newmemo = {title: "new제목", content: "new내용", date: today.toLocaleString()};
-                onCreate(newmemo);
-            }
-            let today = new Date();
-            const update = {...data, date: today.toLocaleString()};
-            btnFunc(id, update);*/
+            const today = new Date();
+            const update = {...data, title: "제목", content: "내용", date: today.toLocaleString()};
+            btnFunc(id, update);
         }
         else if(text==="취소"){
 
