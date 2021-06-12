@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { EditorState } from 'draft-js';
+import { EditorState, RichUtils } from 'draft-js';
 
 function EditorForm({ 
   match,
@@ -15,6 +15,18 @@ function EditorForm({
   };
   const handleChange = (e) => {
     setState({...state, [e.target.name]: e.target.value})
+  }
+  
+  const handleKeyCommand = (command) => {
+
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+
+    if(newState){
+      onChange(newState);
+      return 'handled';
+    }
+
+    return 'not-handled';
   }
 
   return (
@@ -37,6 +49,7 @@ function EditorForm({
         localization={{
           locale: 'ko',
         }}
+        handleKeyCommand={handleKeyCommand}
         editorState={editorState}
         onEditorStateChange={onEditorStateChange}
       />
