@@ -1,5 +1,4 @@
 import React from "react";
-
 import Toolbar from "./Toolbar";
 import Side from "./Side";
 import Memos from "./Memos";

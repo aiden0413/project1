@@ -13,6 +13,7 @@ function Memo({
         setState({...state, [e.target.name]: e.target.value})
     }
 
+ 
     return (
         <div>
             <Link to={"/memo/" + id}>
