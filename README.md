@@ -1,6 +1,6 @@
-# memoproject
+# Memoproject
 
-This is mini memo web application
+This is mini memo web application with weather API
 
 Korea Univ Computer Science
 
