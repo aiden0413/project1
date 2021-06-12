@@ -9,9 +9,20 @@ function EditorForm({
  }) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [state, setState] = useState(data.memolist.find(memo => memo.id === match.params.memoid));
+  const [editorState_title, setEditorState_title] = useState(EditorState.createEmpty());
+  
+  const saveTitle = (title) =>{
+    window.localStorage.setItem('title',JSON.stringify(convertToRaw(title)));
+  }
 
   const saveContent = (content) => {
     window.localStorage.setItem('content', JSON.stringify(convertToRaw(content)));
+  }
+
+  const onTitleStateChange = (editorState_title) =>{
+    const titleState = editorState_title.getCurrentContent();
+    saveTitle(titleState);
+    setEditorState_title(editorState_title);
   }
 
   const onEditorStateChange = (editorState) => {
@@ -35,16 +46,20 @@ function EditorForm({
 
     return 'not-handled';
   }
-
+  
+  
   
 
   return (
     <div className="m-3"> 
-      <input
-        className="outline-none"
-        name="title"
-        placeholder="제목"
-        onChange={handleChange}
+      <Editor
+      toolbarHidden
+      placeholder="제목을 적어주세요."
+      loclization={{
+        local: 'ko',
+      }}
+      editorState={editorState_title}
+      onEditorStateChange={onTitleStateChange}
       />
       <div className="border-b border-gray-300 m-3"/>
       <Editor
@@ -54,11 +69,10 @@ function EditorForm({
           link: { inDropdown: true },
           history: { inDropdown: false },
         }} 
-        placeholder="내용을 작성해주세요."
+        placeholder="무엇을 남길까요?"
         localization={{
           locale: 'ko',
         }}
-        
         editorState={editorState}
         onEditorStateChange={onEditorStateChange}
       />
