@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { EditorState, RichUtils } from 'draft-js';
+import { EditorState, RichUtils, convertToRaw } from 'draft-js';
 
 function EditorForm({ 
   match,
@@ -10,9 +10,16 @@ function EditorForm({
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [state, setState] = useState(data.memolist.find(memo => memo.id === match.params.memoid));
 
+  const saveContent = (content) => {
+    window.localStorage.setItem('content', JSON.stringify(convertToRaw(content)));
+  }
+
   const onEditorStateChange = (editorState) => {
+    const contentState = editorState.getCurrentContent();
+    saveContent(contentState);
     setEditorState(editorState);
   };
+
   const handleChange = (e) => {
     setState({...state, [e.target.name]: e.target.value})
   }
@@ -22,12 +29,14 @@ function EditorForm({
     const newState = RichUtils.handleKeyCommand(editorState, command);
 
     if(newState){
-      onChange(newState);
+      this.onChange(newState);
       return 'handled';
     }
 
     return 'not-handled';
   }
+
+  
 
   return (
     <div className="m-3"> 
@@ -49,7 +58,7 @@ function EditorForm({
         localization={{
           locale: 'ko',
         }}
-        handleKeyCommand={handleKeyCommand}
+        
         editorState={editorState}
         onEditorStateChange={onEditorStateChange}
       />
