@@ -2,7 +2,15 @@
 
 This is mini memo web application with weather API
 
-#1 Made by
+# How to use
+
+# Dependency
+
+# library
+
+
+
+# Made by
 
 Korea Univ Computer Science
 
