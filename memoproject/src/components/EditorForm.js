@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, RichUtils, convertToRaw } from 'draft-js';
@@ -6,8 +6,8 @@ import { EditorState, RichUtils, convertToRaw } from 'draft-js';
 function EditorForm({ 
   match,
   data,
+  setMemoContent,
  }) {
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [state, setState] = useState(data.memolist.find(memo => memo.id === match.params.memoid));
   const [editorState_title, setEditorState_title] = useState(EditorState.createEmpty());
   
@@ -25,14 +25,23 @@ function EditorForm({
     setEditorState_title(editorState_title);
   }
 
+  const [editorState, setEditorState] = useState(state.content);
+
+  const today = new Date();
+
   const onEditorStateChange = (editorState) => {
     const contentState = editorState.getCurrentContent();
     saveContent(contentState);
     setEditorState(editorState);
+    setState({...state, content: editorState, date: today.toLocaleString()});
   };
 
+
+  useEffect(() => {
+    setMemoContent(state);
+  }, [state]);
   const handleChange = (e) => {
-    setState({...state, [e.target.name]: e.target.value})
+    setState({...state, [e.target.name]: e.target.value, date: today.toLocaleString()});
   }
   
   const handleKeyCommand = (command) => {
@@ -52,6 +61,12 @@ function EditorForm({
 
   return (
     <div className="m-3"> 
+      <input
+        className="outline-none"
+        name="title"
+        placeholder="제목"
+        value={state.title}
+        onChange={handleChange}
       <Editor
       toolbarHidden
       placeholder="제목을 적어주세요."

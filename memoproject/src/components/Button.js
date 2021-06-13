@@ -4,8 +4,9 @@ import { EditorState, RichUtils, convertToRaw, Editor, convertFromRaw} from 'dra
 function Button({
     text = "button",
     btnFunc,
-    onCreate,
     id="",
+    onSign,
+    memodata,
     data,
 }) {
 
@@ -15,6 +16,7 @@ function Button({
 
         }
         else if(text==="저장"){
+            //btnFunc(id, memodata);
             const today = new Date();
             const title_string = window.localStorage.getItem('title');
             const title_JSON = JSON.parse(title_string);

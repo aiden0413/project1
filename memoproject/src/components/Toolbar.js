@@ -1,19 +1,13 @@
 import React from "react";
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Button from './Button';
 
 function Toolbar({
-    id="",
-    title="",
-    content="",
-    date="",
     sign,
-    onSign,
+    memodata,
     onSave,
-    onEdit,
     onRemove,
-    onCancel,
     match,
 }) {
     if(sign === true){
@@ -24,12 +18,12 @@ function Toolbar({
                         text="저장"
                         btnFunc={onSave}
                         id={match.params.memoid}
+                        memodata={memodata}
                     />
                 </Link>
                 <Link to="/">
                     <Button 
                         text="취소"
-                        onSign={onSign}
                     />
                 </Link>
                 <Link to="/">
@@ -50,12 +44,6 @@ function Toolbar({
                 <Button 
                     text="검색"
                 />
-                {/*<Button 
-                    text="삭제" 
-                />
-                <Button
-                    text="수정" 
-                />*/}
             </div>
         )}
 }

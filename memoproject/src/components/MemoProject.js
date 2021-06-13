@@ -1,6 +1,7 @@
-import React, { memo, useState } from "react";
+import React, { useState } from "react";
 import { v4 as uuid } from 'uuid';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { EditorState } from 'draft-js';
 
 import Header from "./Header";
 import Content from "./Content";
@@ -8,6 +9,10 @@ import Footer from "./Footer";
 
 function MemoProject() {
     const [data, setData] = useState({
+        /*memolist: [
+            {id: uuid(), title: "제목1", content: EditorState.createEmpty(), date: "날짜1"},
+            {id: uuid(), title: "제목2", content: EditorState.createEmpty(), date: "날짜2"},
+            {id: uuid(), title: "제목3", content: EditorState.createEmpty(), date: "날짜3"}*/
         memolist: [{
             id: uuid(), 
             title: "메모를 작성해보세요", 
@@ -19,16 +24,13 @@ function MemoProject() {
         ],
     })
 
-    const handleCreate = (memodata) => {
-        setData({memolist: [{id: uuid(), ...memodata}].concat(data.memolist)});
-    }
     const handleRemove = (id) => {
-        setData({memolist: data.memolist.filter(memo => memo.id != id)});
-    }
-    const handleEdit = (id) => {
-        setData({memolist: data.memolist.map(memo => memo.id == id ? {...memo} : {...memo, editing: false})});
+        setData({memolist: data.memolist.filter(memo => memo.id !== id)});
     }
     const handleSave = (id, update) => {
+         /*if(data.memolist.some(memo => memo.id === id)){
+            setData({memolist: data.memolist.map(memo => memo.id === id ? {id: memo.id, title: update.title, content: update.content, date: update.date} : memo)});
+        */
         if(data.memolist.some(memo => memo.id == id)){
             setData({memolist: data.memolist.map(memo => memo.id == id ? {id: memo.id, title: update.title, content: update.content, date: update.date, title_json:update.title_json, content_json:update.title_json} : memo)});
         }
@@ -43,9 +45,7 @@ function MemoProject() {
                 <Header />
                 <Content 
                     data={data}
-                    onCreate={handleCreate}
                     onRemove={handleRemove}
-                    onEdit={handleEdit}
                     onSave={handleSave}
                 />
                 <Footer />     

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Route, Link } from 'react-router-dom';
+import React from "react";
+import { Link } from 'react-router-dom';
 
 function Memo({
     id="",
@@ -7,6 +7,7 @@ function Memo({
     content="",
     date="",
 }) {
+
     const [state, setState] = useState({title: title, content: content, date: date})
     
     const handleChange = (e) => {
