@@ -1,27 +1,35 @@
 import React, { memo } from "react";
+import { EditorState, RichUtils, convertToRaw, Editor, convertFromRaw} from 'draft-js';
 
 function Button({
     text = "button",
     btnFunc,
-    onSign,
+    onCreate,
     id="",
     data,
 }) {
+
+    
     const handleOnClick = () => {
         if(text==="새 메모"){
-            let today = new Date();
-            const newmemo = {title: "new제목", content: "new내용", date: today.toLocaleString()};
-            btnFunc(newmemo);
-            onSign(true);
+
         }
         else if(text==="저장"){
-            let today = new Date();
-            const update = {...data, date: today.toLocaleString()};
+            const today = new Date();
+            const title_string = window.localStorage.getItem('title');
+            const title_JSON = JSON.parse(title_string);
+            const title_text = title_JSON.blocks[0].text;
+
+            const content_string = window.localStorage.getItem('content');
+            const content_JSON = JSON.parse(content_string);
+            const content_text = content_JSON.blocks[0].text;
+            
+            const update = {...data, title: title_text, content: content_text, date: today.toLocaleString(), title_json: title_JSON, content_json:content_JSON};
             btnFunc(id, update);
+            console.log(update.content_json);
         }
         else if(text==="취소"){
-            onSign(false);
-            console.log("이전으로 돌아갑니다."); 
+
         }
         else if(text==="삭제"){
             btnFunc(id);
