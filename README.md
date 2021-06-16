@@ -2,7 +2,7 @@
 
 This is mini memo web application with weather API
 
-# 사용 언어
+# 사용 언어 및 도구
 
 ![123](https://user-images.githubusercontent.com/84571770/122160582-24610680-ceab-11eb-9349-9bab800fcdee.png)
 
