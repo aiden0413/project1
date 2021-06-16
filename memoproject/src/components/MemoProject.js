@@ -1,42 +1,57 @@
 import React, { useState } from "react";
 import { v4 as uuid } from 'uuid';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { EditorState } from 'draft-js';
+import { EditorState, ContentState } from 'draft-js';
 
 import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
 
+import { firestore } from "../firebase";
+
 function MemoProject() {
     const [data, setData] = useState({
-        /*memolist: [
-            {id: uuid(), title: "제목1", content: EditorState.createEmpty(), date: "날짜1"},
-            {id: uuid(), title: "제목2", content: EditorState.createEmpty(), date: "날짜2"},
-            {id: uuid(), title: "제목3", content: EditorState.createEmpty(), date: "날짜3"}*/
-        memolist: [{
-            id: uuid(), 
-            title: "메모를 작성해보세요", 
-            content: "클릭", 
-            date: "2021-01-01",
-            title_json: null,
-            content_json: null,
+        memolist: [
+            {
+                id: uuid(), 
+                title: EditorState.createWithContent(ContentState.createFromText('제목1')), 
+                content: EditorState.createWithContent(ContentState.createFromText('내용1')),
+                date: "2021-01-01"
             },
-        ],
+            {
+                id: uuid(), 
+                title: EditorState.createWithContent(ContentState.createFromText('제목2')),
+                content: EditorState.createWithContent(ContentState.createFromText('내용2')),
+                date: "2021-01-02"
+            },
+        ]
     })
+
+    /*var docRef = db.collection("data").doc("memolist");
+
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });*/
+
 
     const handleRemove = (id) => {
         setData({memolist: data.memolist.filter(memo => memo.id !== id)});
     }
     const handleSave = (id, update) => {
-         /*if(data.memolist.some(memo => memo.id === id)){
-            setData({memolist: data.memolist.map(memo => memo.id === id ? {id: memo.id, title: update.title, content: update.content, date: update.date} : memo)});
-        */
         if(data.memolist.some(memo => memo.id == id)){
             setData({memolist: data.memolist.map(memo => memo.id == id ? {id: memo.id, title: update.title, content: update.content, date: update.date, title_json:update.title_json, content_json:update.title_json} : memo)});
         }
         else{
             setData({memolist: [{id: id, title: update.title, content: update.content, date: update.date, title_json:update.title_json, content_json:update.title_json}].concat(data.memolist)});
         }
+        firestore.collection("data").doc("memolist").update({db : "test"})
     }
 
     return (

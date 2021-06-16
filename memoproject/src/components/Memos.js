@@ -1,6 +1,6 @@
 import React from "react";
+
 import Memo from './Memo';
-import { convertToRaw } from 'draft-js';
 
 function Memos({
     data,
@@ -9,7 +9,7 @@ function Memos({
         memo => (<Memo
             id={memo.id}
             title={memo.title}
-            content={convertToRaw(memo.content.getCurrentContent()).blocks[0].text}
+            content={memo.content}
             date={memo.date}
         />)
     );

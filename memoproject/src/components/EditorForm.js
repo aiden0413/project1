@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { EditorState, RichUtils, convertToRaw } from 'draft-js';
@@ -6,10 +6,15 @@ import { EditorState, RichUtils, convertToRaw } from 'draft-js';
 function EditorForm({ 
   match,
   data,
-  setMemoContent,
  }) {
-  const [state, setState] = useState(data.memolist.find(memo => memo.id === match.params.memoid));
-  const [editorState_title, setEditorState_title] = useState(EditorState.createEmpty());
+  const today = new Date();
+  
+  const [editorState_content, setEditorState_content] = useState(data.memolist.some(memo => memo.id === match.params.memoid)?
+  data.memolist.find(memo => memo.id === match.params.memoid).content : EditorState.createEmpty()
+);
+  const [editorState_title, setEditorState_title] = useState(data.memolist.some(memo => memo.id === match.params.memoid)?
+  data.memolist.find(memo => memo.id === match.params.memoid).title : EditorState.createEmpty()
+);
   
   const saveTitle = (title) =>{
     window.localStorage.setItem('title',JSON.stringify(convertToRaw(title)));
@@ -25,28 +30,15 @@ function EditorForm({
     setEditorState_title(editorState_title);
   }
 
-  const [editorState, setEditorState] = useState(state.content);
-
-  const today = new Date();
-
-  const onEditorStateChange = (editorState) => {
-    const contentState = editorState.getCurrentContent();
+  const onEditorStateChange = (editorState_content) => {
+    const contentState = editorState_content.getCurrentContent();
     saveContent(contentState);
-    setEditorState(editorState);
-    setState({...state, content: editorState, date: today.toLocaleString()});
+    setEditorState_content(editorState_content);
   };
-
-
-  useEffect(() => {
-    setMemoContent(state);
-  }, [state]);
-  const handleChange = (e) => {
-    setState({...state, [e.target.name]: e.target.value, date: today.toLocaleString()});
-  }
   
   const handleKeyCommand = (command) => {
 
-    const newState = RichUtils.handleKeyCommand(editorState, command);
+    const newState = RichUtils.handleKeyCommand(editorState_content, command);
 
     if(newState){
       this.onChange(newState);
@@ -56,17 +48,9 @@ function EditorForm({
     return 'not-handled';
   }
   
-  
-  
 
   return (
     <div className="m-3"> 
-      <input
-        className="outline-none"
-        name="title"
-        placeholder="제목"
-        value={state.title}
-        onChange={handleChange}
       <Editor
       toolbarHidden
       placeholder="제목을 적어주세요."
@@ -88,7 +72,8 @@ function EditorForm({
         localization={{
           locale: 'ko',
         }}
-        editorState={editorState}
+        handleKeyCommand={handleKeyCommand}
+        editorState={editorState_content}
         onEditorStateChange={onEditorStateChange}
       />
     </div>

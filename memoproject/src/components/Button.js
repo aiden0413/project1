@@ -5,8 +5,6 @@ function Button({
     text = "button",
     btnFunc,
     id="",
-    onSign,
-    memodata,
     data,
 }) {
 
@@ -16,19 +14,16 @@ function Button({
 
         }
         else if(text==="저장"){
-            //btnFunc(id, memodata);
             const today = new Date();
             const title_string = window.localStorage.getItem('title');
-            const title_JSON = JSON.parse(title_string);
-            const title_text = title_JSON.blocks[0].text;
+            const title_JSON = EditorState.createWithContent(convertFromRaw(JSON.parse(title_string)));
 
             const content_string = window.localStorage.getItem('content');
-            const content_JSON = JSON.parse(content_string);
-            const content_text = content_JSON.blocks[0].text;
+            const content_JSON = EditorState.createWithContent(convertFromRaw(JSON.parse(content_string)));
             
-            const update = {...data, title: title_text, content: content_text, date: today.toLocaleString(), title_json: title_JSON, content_json:content_JSON};
+            const update = {...data, title: title_JSON, content: content_JSON, date: today.toLocaleString()};
             btnFunc(id, update);
-            console.log(update.content_json);
+            console.log(content_JSON);
         }
         else if(text==="취소"){
 
