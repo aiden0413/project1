@@ -2,11 +2,11 @@
 
 This is mini memo web application with weather API
 
-# How to use
+# 사용 언어
 
-# Dependency
+# 개발
 
-# library
+# 구현화면
 
 
 
