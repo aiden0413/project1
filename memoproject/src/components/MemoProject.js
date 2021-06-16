@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { v4 as uuid } from 'uuid';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { EditorState, ContentState } from 'draft-js';
+import { EditorState, ContentState, convertToRaw, convertFromRaw } from 'draft-js';
 
 import Header from "./Header";
 import Content from "./Content";
@@ -12,46 +12,62 @@ import { firestore } from "../firebase";
 function MemoProject() {
     const [data, setData] = useState({
         memolist: [
-            {
-                id: uuid(), 
-                title: EditorState.createWithContent(ContentState.createFromText('제목1')), 
-                content: EditorState.createWithContent(ContentState.createFromText('내용1')),
-                date: "2021-01-01"
-            },
-            {
-                id: uuid(), 
-                title: EditorState.createWithContent(ContentState.createFromText('제목2')),
-                content: EditorState.createWithContent(ContentState.createFromText('내용2')),
-                date: "2021-01-02"
-            },
-        ]
-    })
-
-    /*var docRef = db.collection("data").doc("memolist");
-
-    docRef.get().then((doc) => {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+        {
+            id: uuid(), 
+            title: EditorState.createWithContent(ContentState.createFromText("제목1")), 
+            content: EditorState.createWithContent(ContentState.createFromText("내용1")),
+            date: "2021-01-01",
+            weather: { temp: 0, desc: '', icon: '', loading: true }
         }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });*/
+    ]});
 
+    const dbRead =() =>{
+        firestore.collection("data").doc("memolist").get().then((doc)=>{
+            const dbdata = {memolist: doc.data().memolist.map(memo => ({
+                id: memo.id,
+                title: EditorState.createWithContent(convertFromRaw(JSON.parse(memo.title))),
+                content: EditorState.createWithContent(convertFromRaw(JSON.parse(memo.content))),
+                date: memo.date,
+                weather: memo.weather
+            }))};
+            setData(dbdata);
+        });
+    }
+
+    const dbSave = () => {
+        const dbdata = {memolist: data.memolist.map(memo => ({
+            id: memo.id,
+            title: JSON.stringify(convertToRaw(memo.title.getCurrentContent())),
+            content: JSON.stringify(convertToRaw(memo.content.getCurrentContent())),
+            date: memo.date,
+            weather: memo.weather
+        }))};
+        firestore.collection("data").doc("memolist").set({memolist : dbdata.memolist});
+    }
+
+    useEffect(()=>{
+        dbRead();
+    },  [])
+
+    const isFirstRun = useRef(true);
+    useEffect(() => {
+        if (isFirstRun.current) {
+            isFirstRun.current = false;
+            return;
+        }
+        dbSave();
+    },  [data])
 
     const handleRemove = (id) => {
         setData({memolist: data.memolist.filter(memo => memo.id !== id)});
     }
     const handleSave = (id, update) => {
-        if(data.memolist.some(memo => memo.id == id)){
-            setData({memolist: data.memolist.map(memo => memo.id == id ? {id: memo.id, title: update.title, content: update.content, date: update.date, title_json:update.title_json, content_json:update.title_json} : memo)});
+        if(data.memolist.some(memo => memo.id === id)){
+            setData({memolist: data.memolist.map(memo => memo.id === id ? {id: memo.id, title: update.title, content: update.content, date: update.date, weather: update.weather} : memo)});
         }
         else{
-            setData({memolist: [{id: id, title: update.title, content: update.content, date: update.date, title_json:update.title_json, content_json:update.title_json}].concat(data.memolist)});
+            setData({memolist: [{id: id, title: update.title, content: update.content, date: update.date, weather: update.weather}].concat(data.memolist)});
         }
-        firestore.collection("data").doc("memolist").update({db : "test"})
     }
 
     return (

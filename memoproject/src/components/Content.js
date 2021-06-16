@@ -10,50 +10,44 @@ function Content({
     onRemove,
     onSave,
  }) {
-    const [memodata, setMemodata] = useState({id: "", title: "", content: {}, date: ""});
-
-    const setMemoContent = (memoContent) =>{
-        setMemodata(memoContent);
-    }
-
     return (
         <div className="flex flex-row flex-grow overflow-auto">
             <Side/>
-            <div className="flex flex-col flex-grow">
-                <Switch>
-                    <Route exact path="/"
-                        render={(props) => (
-                        <div>
-                            <Toolbar
-                                sign={false}
-                                {...props}
-                            />
-                            <Memos 
-                                data={data}
-                                {...props}
-                            />
-                        </div>
-                        )}
-                    />
-                    <Route path="/memo/:memoid" 
-                        render={(props) => (
-                            <div>
+            <div className="flex flex-row flex-grow overlow-auto">
+                <div className="flex flex-col flex-grow oerflow-auto">
+                    <Switch>
+                        <Route exact path="/"
+                            render={(props) => (
+                            <div className="flex flex-col flex-grow overflow-auto">
                                 <Toolbar
-                                    sign={true}
-                                    onRemove={onRemove}
-                                    onSave={onSave}
-                                    memodata={memodata}
+                                    sign={false}
                                     {...props}
                                 />
-                                <EditorForm
-                                    setMemoContent={setMemoContent}
+                                <Memos 
                                     data={data}
                                     {...props}
                                 />
                             </div>
-                        )}
-                    />
-                </Switch>
+                            )}
+                        />
+                        <Route path="/memo/:memoid" 
+                            render={(props) => (
+                                <div className="flex flex-col flex-grow">
+                                    <Toolbar
+                                        sign={true}
+                                        onRemove={onRemove}
+                                        onSave={onSave}
+                                        {...props}
+                                    />
+                                    <EditorForm
+                                        data={data}
+                                        {...props}
+                                    />
+                                </div>
+                            )}
+                        />
+                    </Switch>
+                </div>
             </div>
         </div>
     )

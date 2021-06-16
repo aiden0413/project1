@@ -11,6 +11,7 @@ function Memos({
             title={memo.title}
             content={memo.content}
             date={memo.date}
+            weather={memo.weather}
         />)
     );
     

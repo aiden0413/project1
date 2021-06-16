@@ -7,6 +7,8 @@ module.exports = {
       'screen': '100vh',
       '300px': '300px',
       '500px': '500px',
+      '56px': '56px',
+      '330px': '330px',
     },
     width: {
       '200px': '200px',
