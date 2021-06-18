@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Link } from 'react-router-dom';
-import markimg from './wemo_mark.png';
+import markimg from './new_ci.png';
 
 import Weather from "./Weather"
 
