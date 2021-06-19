@@ -25,10 +25,10 @@ function Button({
             }
 
             let content_JSON;
-            const content_string = window.localStorage.getItem('title');
+            const content_string = window.localStorage.getItem('content');
                 content_JSON = EditorState.createWithContent(convertFromRaw(JSON.parse(content_string)));
             if(convertToRaw(content_JSON.getCurrentContent()).blocks[0].text === ""){
-                title_JSON = EditorState.createWithContent(ContentState.createFromText("제목"));
+                content_JSON = EditorState.createWithContent(ContentState.createFromText("내용"));
             }
             
             const update = {...data, title: title_JSON, content: content_JSON, date: today.toLocaleString(), weather: state};
@@ -46,8 +46,8 @@ function Button({
 
     useEffect(()=>{
         const cityName = 'Seoul';
-        const apiKey = '084c3808739f5624eb95f1489adf9c0a';
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+        const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+        const url = `https://wemo-project.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
         axios.get(url)
             .then(responseData => {
