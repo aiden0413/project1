@@ -17,7 +17,7 @@ This is mini memo web application with weather API
 
 # 주요기능
  1. **저장**
-    - Firebase DB를 이용하여서 저장 버튼을 눌렀을 때, 메모지의 data 값 {id,title,contents,data,weather} 을 저장
+    - Firebase DB를 이용하여서 저장 버튼을 눌렀을 때, 메모지의 data 값 {id,title,contents,date,weather} 을 저장
  2. **새 메모**
     - Draft js 를 이용하여서 새 메모를 작성할 때 다양한 Tool을 제공하여 좀 더 풍성한 메모를 작성할 수 있습니다.
  3. **수정하기**
