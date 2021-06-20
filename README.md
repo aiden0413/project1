@@ -23,14 +23,26 @@ This is mini memo web application with weather API
  3. **수정하기**
     - 메인화면의 저장된 메모지 리스트 중 수정하고 싶은 메모지를 클릭한 후 메모를 수정할 수 있습니다.
     - 메모지 클릭을 통한 직관적인 메모 수정이 가능합니다.
+    - "새 메모" 작성시 기존 데이터를 불러와 "저장(save)" 버튼을 누름과 동시에 DB에 반영이 됩니다.
+
+    **전산학특강 5팀 날씨관련 Wiki 문서 링크**
+    
+ -> https://github.com/aiden0413/memoproject/wiki/EditorForm.js
+ -> https://github.com/aiden0413/memoproject/wiki/Button.js
+
+
  4. **날짜 DATA**
     - 실시간 날짜 DATA를 연동하여 메모를 작성한 시간을 기록합니다.
-
+   
  5. **날씨 DATA**
     - OPEN API 를 axios 를 이용하여 실시간으로 날씨 데이터를 불러옵니다.
     - 불러온 데이터 중 필요한 데이터를 추출합니다.
     - 추출 데이터중 "온도(temp)" 데이터를 이용하여 온도 값에 따라 메모지 색을 하여 좀 더 감성적인 메모를 작성할 수 있습니다.
-    - 
+    
+    **전산학특강 5팀 날씨관련 Wiki 문서 링크**
+    
+  ->  https://github.com/aiden0413/memoproject/wiki/Weather.js
+    
 # Made by
 
 Korea Univ Computer Science
