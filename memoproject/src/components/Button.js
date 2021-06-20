@@ -51,7 +51,6 @@ function Button({
 
         axios.get(url)
             .then(responseData => {
-                console.log(responseData);
                 const data = responseData.data;
                 setState({
                     temp: data.main.temp,

@@ -10,9 +10,9 @@ const Weather  = () => {
         const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
         const url = `https://wemo-project.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
-        axios.get(url)
+        const realtimeweather = setInterval(() => {
+            axios.get(url)
             .then(responseData => {
-                console.log(responseData);
                 const data = responseData.data;
                 setState({
                     temp: data.main.temp,
@@ -22,7 +22,9 @@ const Weather  = () => {
                 });
             })
             .catch(error => console.log(error));
-    },[])
+        }, 3000);
+        return () => clearInterval(realtimeweather)  
+    },[state])
 
     const imgSrc = `http://openweathermap.com/img/w/${state.icon}.png`;
     if (state.loading) {

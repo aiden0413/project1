@@ -10,16 +10,7 @@ import Footer from "./Footer";
 import { firestore } from "../firebase";
 
 function MemoProject() {
-    const [data, setData] = useState({
-        memolist: [
-        {
-            id: uuid(), 
-            title: EditorState.createWithContent(ContentState.createFromText("제목1")), 
-            content: EditorState.createWithContent(ContentState.createFromText("내용1")),
-            date: "2021-01-01",
-            weather: { temp: 0, desc: '', icon: '', loading: true }
-        }
-    ]});
+    const [data, setData] = useState(null);
 
     const dbRead =() =>{
         firestore.collection("data").doc("memolist").get().then((doc)=>{
