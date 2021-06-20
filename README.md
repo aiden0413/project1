@@ -15,6 +15,10 @@ This is mini memo web application with weather API
  5. **OpenWeather** 에서 얻어온 날씨 정보를 얻어 사용하였습니다.
  6. **온도** 정보 값을 이용 하여 메모지 **색 연동** 을 하였습니다.
 
+# Tree
+
+![컴포넌트트리](https://user-images.githubusercontent.com/34851254/122684956-9a66c400-d243-11eb-8440-e055b86dc427.jpg)
+
 # 주요기능
  1. **저장**
     - Firebase DB를 이용하여서 저장 버튼을 눌렀을 때, 메모지의 data 값 {id,title,contents,date,weather} 을 저장
