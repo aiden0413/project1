@@ -25,11 +25,15 @@ This is mini memo web application with weather API
     - 메모지 클릭을 통한 직관적인 메모 수정이 가능합니다.
     - "새 메모" 작성시 기존 데이터를 불러와 "저장(save)" 버튼을 누름과 동시에 DB에 반영이 됩니다.
 
-    **전산학특강 5팀 날씨관련 Wiki 문서 링크**
+    **전산학특강 5팀 저장,삭제,수정,새메모 Wiki 문서 링크**
     
  -> https://github.com/aiden0413/memoproject/wiki/EditorForm.js
  
  -> https://github.com/aiden0413/memoproject/wiki/Button.js
+ 
+ -> https://github.com/aiden0413/memoproject/wiki/Content.js
+ 
+ -> https://github.com/aiden0413/memoproject/wiki/Toolbar.js
 
 
  4. **날짜 DATA**
