@@ -17,7 +17,9 @@ function Header() {
 
     return (
         <div className="flex flex-row justify-between py-6 px-6 border border-gray-300 relative fixed items-center">
-            <Link to="/"><img src={markimg}/></Link>
+            <Link to="/">
+                <img className="h-56px" src={markimg}/>
+                </Link>
             <div>{today}</div>
             <Weather/>
         </div>
