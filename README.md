@@ -17,7 +17,8 @@ This is mini memo web application with weather API
 
 # Tree
 
-![컴포넌트트리](https://user-images.githubusercontent.com/34851254/122684956-9a66c400-d243-11eb-8440-e055b86dc427.jpg)
+![컴포넌트트리](https://user-images.githubusercontent.com/34851254/122685092-5f18c500-d244-11eb-942b-133480d3aafa.jpg)
+
 
 # 주요기능
  1. **저장**
