@@ -7,8 +7,6 @@ function EditorForm({
   match,
   data,
  }) {
-  const today = new Date();
-
   const [editorState_content, setEditorState_content] = useState(data.memolist.some(memo => memo.id === match.params.memoid)?
     data.memolist.find(memo => memo.id === match.params.memoid).content : EditorState.createEmpty()
   );

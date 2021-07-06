@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { EditorState, ContentState, convertToRaw, Editor, convertFromRaw} from 'draft-js';
+import { EditorState, ContentState, convertToRaw, convertFromRaw} from 'draft-js';
 import axios from 'axios';
 
 function Button({
@@ -47,7 +47,8 @@ function Button({
     useEffect(()=>{
         const cityName = 'Seoul';
         const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-        const url = `https://wemo-project.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+        //const url = `https://wemo-project.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
 
         axios.get(url)
             .then(responseData => {
