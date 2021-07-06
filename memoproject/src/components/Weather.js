@@ -24,7 +24,8 @@ const Weather  = () => {
                 });
             })
             .catch(error => console.log(error));
-        }, 3000);
+        }, 1000);
+        window.localStorage.setItem('weather', JSON.stringify(state));
         return () => clearInterval(realtimeweather)  
     },[state])
 
@@ -35,7 +36,7 @@ const Weather  = () => {
         return (
             <div className="App flex flex-row">
                 <div>
-                <img src={imgSrc}/>
+                <img src={imgSrc} alt='img'/>
                 </div>
                 <div>
                 <p>{Math.round((state.temp-273.15) * 100) / 100}°C</p>

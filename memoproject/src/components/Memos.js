@@ -1,11 +1,13 @@
 import React from "react";
+import { useSelector } from 'react-redux';
+import { EditorState, convertFromRaw } from 'draft-js';
 
 import Memo from './Memo';
 
-function Memos({
-    data,
-}) {
-    if(data === null){
+function Memos (){
+    const data = useSelector(state => state);
+
+    if(data.length === 0){
         return(
             <div></div>
         );
@@ -13,9 +15,10 @@ function Memos({
     else{
         const memolist = data.memolist.map(
             memo => (<Memo
+                key={memo.id}
                 id={memo.id}
-                title={memo.title}
-                content={memo.content}
+                title={EditorState.createWithContent(convertFromRaw(JSON.parse(memo.title)))}
+                content={EditorState.createWithContent(convertFromRaw(JSON.parse(memo.content)))}
                 date={memo.date}
                 weather={memo.weather}
             />)

@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { EditorState, ContentState, convertToRaw, convertFromRaw} from 'draft-js';
+/*import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 function Button({
     text = "button",
-    btnFunc,
-    id="",
-    data,
 }) {
     const [state, setState] = useState({ temp: 0, desc: '', icon: '', loading: true })
     
@@ -15,7 +11,8 @@ function Button({
 
         }
         else if(text==="저장"){
-            const today = new Date();
+            console.log("애미 ㅋ")
+            /*const today = new Date();
 
             let title_JSON;
             const title_string = window.localStorage.getItem('title');
@@ -34,13 +31,13 @@ function Button({
             const update = {...data, title: title_JSON, content: content_JSON, date: today.toLocaleString(), weather: state};
 
             btnFunc(id, update);
-            window.localStorage.clear();
+            window.localStorage.clear();*//*
         }
         else if(text==="취소"){
 
         }
         else if(text==="삭제"){
-            btnFunc(id);
+            //btnFunc(id);
         }
     }
 
@@ -73,4 +70,4 @@ function Button({
     )
 }
 
-export default Button;
+export default Button;*/

@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import rootReducer from './memo'
+import { memoReducer } from './memo'
 
 const store = configureStore({
-  reducer: memo
+  reducer: memoReducer
 })
 
 export default store

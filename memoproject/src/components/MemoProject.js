@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BrowserRouter as Router } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
-import { EditorState, ContentState, convertToRaw, convertFromRaw } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
 import Header from "./Header";
 import Content from "./Content";
@@ -11,7 +10,7 @@ import { firestore } from "../firebase";
 
 function MemoProject() {
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState({});
 
     const dbRead =() =>{
         firestore.collection("data").doc("memolist").get().then((doc)=>{
@@ -38,7 +37,7 @@ function MemoProject() {
     }
 
     useEffect(()=>{
-        dbRead();
+        //dbRead();
     },  [])
 
     const isFirstRun = useRef(true);
@@ -47,30 +46,14 @@ function MemoProject() {
             isFirstRun.current = false;
             return;
         }
-        dbSave();
+        //dbSave();
     },  [data])
-
-    const handleRemove = (id) => {
-        setData({memolist: data.memolist.filter(memo => memo.id !== id)});
-    }
-    const handleSave = (id, update) => {
-        if(data.memolist.some(memo => memo.id === id)){
-            setData({memolist: data.memolist.map(memo => memo.id === id ? {id: memo.id, title: update.title, content: update.content, date: update.date, weather: update.weather} : memo)});
-        }
-        else{
-            setData({memolist: [{id: id, title: update.title, content: update.content, date: update.date, weather: update.weather}].concat(data.memolist)});
-        }
-    }
 
     return (
         <Router>
             <div className="flex flex-col h-screen">
                 <Header />
-                <Content 
-                    data={data}
-                    onRemove={handleRemove}
-                    onSave={handleSave}
-                />
+                <Content />
                 <Footer />     
             </div>
         </Router>

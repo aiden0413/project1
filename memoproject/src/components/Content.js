@@ -5,11 +5,7 @@ import Memos from "./Memos";
 import EditorForm from "./EditorForm";
 import { Route, Switch } from 'react-router-dom';
 
-function Content({ 
-    data,
-    onRemove,
-    onSave,
- }) {
+function Content() {
     return (
         <div className="flex flex-row flex-grow overflow-auto">
             <Side/>
@@ -24,7 +20,6 @@ function Content({
                                     {...props}
                                 />
                                 <Memos 
-                                    data={data}
                                     {...props}
                                 />
                             </div>
@@ -35,12 +30,9 @@ function Content({
                                 <div className="flex flex-col flex-grow">
                                     <Toolbar
                                         sign={true}
-                                        onRemove={onRemove}
-                                        onSave={onSave}
                                         {...props}
                                     />
                                     <EditorForm
-                                        data={data}
                                         {...props}
                                     />
                                 </div>

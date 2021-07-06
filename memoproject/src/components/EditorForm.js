@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { EditorState, RichUtils, convertToRaw } from 'draft-js';
+import { EditorState, RichUtils, convertToRaw, convertFromRaw } from 'draft-js';
+import { useSelector } from 'react-redux';
 
 function EditorForm({ 
   match,
-  data,
  }) {
+  const data = useSelector(state => state);
+
   const [editorState_content, setEditorState_content] = useState(data.memolist.some(memo => memo.id === match.params.memoid)?
-    data.memolist.find(memo => memo.id === match.params.memoid).content : EditorState.createEmpty()
+    EditorState.createWithContent(convertFromRaw(JSON.parse(data.memolist.find(memo => memo.id === match.params.memoid).content))) 
+    : EditorState.createEmpty()
   );
   const [editorState_title, setEditorState_title] = useState(data.memolist.some(memo => memo.id === match.params.memoid)?
-    data.memolist.find(memo => memo.id === match.params.memoid).title : EditorState.createEmpty()
+    EditorState.createWithContent(convertFromRaw(JSON.parse(data.memolist.find(memo => memo.id === match.params.memoid).title)))
+    : EditorState.createEmpty()
   );
 
   useEffect(()=>{
     window.localStorage.setItem('title',JSON.stringify(convertToRaw(editorState_title.getCurrentContent())));
     window.localStorage.setItem('content', JSON.stringify(convertToRaw(editorState_content.getCurrentContent())));
-  },  [])
+  },  [editorState_title, editorState_content])
 
   const saveTitle = (title) =>{
     window.localStorage.setItem('title',JSON.stringify(convertToRaw(title)));

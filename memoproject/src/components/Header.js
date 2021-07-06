@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import markimg from './new_ci.png';
 
 import Weather from "./Weather"
@@ -18,7 +18,7 @@ function Header() {
     return (
         <div className="flex flex-row justify-between py-6 px-6 border border-gray-300 relative fixed items-center">
             <Link to="/">
-                <img className="h-56px" src={markimg}/>
+                <img className="h-56px" src={markimg} alt='img'/>
                 </Link>
             <div>{today}</div>
             <Weather/>

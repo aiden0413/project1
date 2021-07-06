@@ -3,13 +3,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { removeMemo, saveMemo } from "../redux/memo";
 
-import Button from './Button';
-
 function Toolbar({
     sign,
-    memodata,
-    onSave,
-    onRemove,
     match,
 }) {
     const dispatch = useDispatch()
@@ -18,36 +13,45 @@ function Toolbar({
         return (
             <div className="flex flex-row flex-grow-0 gap-6 justify-start py-6 px-6 border border-gray-300 relative">
                 <Link to="/">
-                    <Button 
-                        text="저장"
-                        btnFunc={onSave}
-                        id={match.params.memoid}
-                        memodata={memodata}
-                    />
+                    <div className="flex-initial w-full py-1 px-3 font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-white bg-blue-400 border-green-400 hover:bg-green-600 hover:border-green-600">
+                        <button
+                            onClick = {() => dispatch(saveMemo(match.params.memoid))}
+                        >
+                        저장
+                        </button>
+                    </div>
                 </Link>
                 <Link to="/">
-                    <Button 
-                        text="취소"
-                    />
+                    <div className="flex-initial w-full py-1 px-3 font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-white bg-blue-400 border-green-400 hover:bg-green-600 hover:border-green-600">
+                        <button>
+                        취소
+                        </button>
+                    </div>
                 </Link>
                 <Link to="/">
-                    <Button 
-                        text="삭제" 
-                        btnFunc={onRemove}
-                        id={match.params.memoid}
-                    />
+                    <div className="flex-initial w-full py-1 px-3 font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-white bg-blue-400 border-green-400 hover:bg-green-600 hover:border-green-600">
+                        <button
+                            onClick = {() => dispatch(removeMemo(match.params.memoid))}
+                        >
+                        삭제
+                        </button>
+                    </div>
                 </Link>
             </div>
     )}
     else{
         return (
             <div className="flex flex-row flex-grow-0 gap-6 justify-start py-6 px-6 border border-gray-300 relative">
-                <Button 
-                    text="시간순 정렬" 
-                />
-                <Button 
-                    text="검색"
-                />
+                <div className="flex-initial w-full py-1 px-3 font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-white bg-blue-400 border-green-400 hover:bg-green-600 hover:border-green-600">
+                    <button>
+                    시간순 정렬
+                    </button>
+                </div>
+                <div className="flex-initial w-full py-1 px-3 font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-white bg-blue-400 border-green-400 hover:bg-green-600 hover:border-green-600">
+                    <button>
+                    검색
+                    </button>
+                </div>
             </div>
         )}
 }

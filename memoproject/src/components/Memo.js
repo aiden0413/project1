@@ -45,7 +45,7 @@ function Memo({
                     <div className={datebg}>
                         <div className="inline-block text-xs align-middle">{date}</div>
                         <div className="align-middle">{Math.round((weather.temp-273.15) * 100) / 100}°C</div>
-                        <div className="align-middle"><img src={imgSrc}/></div>
+                        <div className="align-middle"><img src={imgSrc} alt='img'/></div>
                     </div>
                 </div>
             </Link>
