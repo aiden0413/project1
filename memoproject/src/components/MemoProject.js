@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { BrowserRouter as Router } from 'react-router-dom';
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import { useDispatch, useSelector } from "react-redux";
+import { initMemo } from "../redux/memo";
 
 import Header from "./Header";
 import Content from "./Content";
@@ -9,36 +10,21 @@ import Footer from "./Footer";
 import { firestore } from "../firebase";
 
 function MemoProject() {
+    const dispatch = useDispatch()
+    const data = useSelector(state => state)
 
-    const [data, setData] = useState({});
-
-    const dbRead =() =>{
+    useEffect(()=>{
         firestore.collection("data").doc("memolist").get().then((doc)=>{
             const dbdata = {memolist: doc.data().memolist.map(memo => ({
                 id: memo.id,
-                title: EditorState.createWithContent(convertFromRaw(JSON.parse(memo.title))),
-                content: EditorState.createWithContent(convertFromRaw(JSON.parse(memo.content))),
+                title: memo.title,
+                content: memo.content,
                 date: memo.date,
                 weather: memo.weather
             }))};
-            setData(dbdata);
+            dispatch(initMemo(dbdata))
         });
-    }
-
-    const dbSave = () => {
-        const dbdata = {memolist: data.memolist.map(memo => ({
-            id: memo.id,
-            title: JSON.stringify(convertToRaw(memo.title.getCurrentContent())),
-            content: JSON.stringify(convertToRaw(memo.content.getCurrentContent())),
-            date: memo.date,
-            weather: memo.weather
-        }))};
-        firestore.collection("data").doc("memolist").set({memolist : dbdata.memolist});
-    }
-
-    useEffect(()=>{
-        //dbRead();
-    },  [])
+    },  [dispatch])
 
     const isFirstRun = useRef(true);
     useEffect(() => {
@@ -46,8 +32,15 @@ function MemoProject() {
             isFirstRun.current = false;
             return;
         }
-        //dbSave();
-    },  [data])
+        const dbdata = {memolist: data.memolist.map(memo => ({
+            id: memo.id,
+            title: memo.title,
+            content: memo.content,
+            date: memo.date,
+            weather: memo.weather
+        }))};
+        firestore.collection("data").doc("memolist").set({memolist : dbdata.memolist});
+    },  [dispatch, data])
 
     return (
         <Router>

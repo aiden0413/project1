@@ -6,7 +6,6 @@ import Memo from './Memo';
 
 function Memos (){
     const data = useSelector(state => state);
-
     if(data.length === 0){
         return(
             <div></div>
